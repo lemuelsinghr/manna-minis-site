@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>How it works · Manna Minis pipeline</title><link rel="stylesheet" href="style.css"></head><body><main>
+<nav><a href="./">Home</a><a href="how-it-works.html">How it works</a><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms of service</a></nav>
+<h1>How it works</h1>
+<p class="muted">The Manna Minis pipeline has one user: the owner of the Manna Minis YouTube channel. This page shows what it does and exactly how it uses the YouTube Data API.</p>
+
+<h2>From chapter to private upload</h2>
+<ol class="steps">
+<li><strong>Questions.</strong> For each Bible chapter, the pipeline writes quiz questions from the public-domain American Standard Version text.</li>
+<li><strong>Owner review on the phone.</strong> The owner picks the questions to keep, approves the thumbnail art, and (for Tamil) proofreads the translation on a private review page that only the owner can open.</li>
+<li><strong>Video.</strong> The pipeline records the narration and renders the animated quiz video and its thumbnail.</li>
+<li><strong>QA.</strong> Automated checks run (format, length, sound, text layout, correct answers), then the owner watches the video and approves it.</li>
+<li><strong>Private upload.</strong> Only after that approval, the pipeline uploads the video to the owner's own channel as <strong>private</strong>, marked Made for Kids, with its title, description, tags and thumbnail.</li>
+<li><strong>The owner publishes.</strong> The owner opens YouTube Studio and presses Publish. The pipeline never makes a video public.</li>
+<li><strong>Status check.</strong> Once a day the pipeline reads the uploaded video's privacy status, so it knows when the owner has published it and can archive the files.</li>
+</ol>
+
+<h2>The owner's review page</h2>
+<div class="shots">
+<figure><img src="img/review-list.jpg" alt="Review page listing items waiting for the owner: shortlist, proofreading, finished video review, upload" loading="lazy"><figcaption>Items waiting for the owner.</figcaption></figure>
+<figure><img src="img/review-shortlist.jpg" alt="Shortlist screen with quiz questions, options and tick boxes" loading="lazy"><figcaption>Picking the 10 questions to keep.</figcaption></figure>
+<figure><img src="img/review-qa.jpg" alt="Video review screen with automated checks passed, a link to watch the video and the thumbnail" loading="lazy"><figcaption>Reviewing the finished video before it is uploaded.</figcaption></figure>
+</div>
+<figure class="wide"><img src="img/thumbnail-gen-04.jpg" alt="Thumbnail: Genesis 4, Bible Quiz for Kids, with cartoon Cain and Abel and the pink Manna Minis mascot" loading="lazy"><figcaption>A finished thumbnail, set on the private video with <code>thumbnails.set</code>.</figcaption></figure>
+
+<h2>YouTube Data API use</h2>
+<table>
+<tr><th>Call</th><th>When</th><th>What it does</th></tr>
+<tr><td><code>videos.insert</code><br>(part=snippet,status)</td><td>After the owner approves a video</td><td>Uploads the video to the owner's channel with <code>privacyStatus: private</code> and <code>selfDeclaredMadeForKids: true</code>, plus title, description, tags, category Education and language.</td></tr>
+<tr><td><code>thumbnails.set</code></td><td>Right after the upload</td><td>Sets the video's custom thumbnail.</td></tr>
+<tr><td><code>videos.list</code><br>(part=status)</td><td>Once a day, for uploaded videos</td><td>Reads the privacy status of the owner's own uploaded videos, to see whether the owner has published them.</td></tr>
+</table>
+<p>About one or two uploads a day, well inside the default quota. The pipeline does not read or change anything else on YouTube: no comments, no other channels, no analytics, no viewer data.</p>
+
+<h2>Sign-in and data</h2>
+<p>The owner signs in once with Google. The pipeline uses that permission only for the owner's own YouTube channel, Google Drive (video files) and Google Sheets (the review list). Nothing is shared with anyone. See the <a href="privacy.html">privacy policy</a>.</p>
+</main></body></html>

@@ -9,3 +9,13 @@ p,li{color:var(--fg)}
 .muted{color:var(--muted)}
 a{color:var(--acc)}
 nav{display:flex;gap:16px;flex-wrap:wrap;padding-bottom:16px;margin-bottom:24px;border-bottom:1px solid var(--line);font-weight:600}
+ol.steps{padding-left:22px}
+ol.steps li{margin-bottom:8px}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:16px 0}
+figure{margin:0}
+figure img{width:100%;height:auto;border:1px solid var(--line);border-radius:12px;display:block}
+figcaption{font-size:14px;color:var(--muted);margin-top:6px}
+.wide img{max-width:640px}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0}
+th,td{text-align:left;padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+code{font-size:14px;background:var(--line);padding:1px 5px;border-radius:4px;overflow-wrap:anywhere}
